@@ -58,15 +58,15 @@ const userSchema = new mongoose.Schema(
           "https://res.cloudinary.com/dn57femqe/image/upload/f_auto,q_auto/icon-default-icon_lnptag",
       },
     },
-    favorites: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
-        },
-      ],
-      default: [],
-    },
+    // favorites: {
+    //   type: [
+    //     {
+    //       type: mongoose.Schema.Types.ObjectId,
+    //       ref: "Product",
+    //     },
+    //   ],
+    //   default: [],
+    // },
   },
   { timestamps: true },
 );
