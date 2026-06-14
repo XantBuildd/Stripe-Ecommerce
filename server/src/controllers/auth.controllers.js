@@ -1,7 +1,8 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { cookieHelper } from "../libs/cookieHelper.js";
+import { cookieHelper } from "../utils/cookieHelper.js";
+import { jwtSign } from "../services/jwt.js";
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
@@ -20,9 +21,7 @@ export const register = async (req, res) => {
       password: hashPassword,
     });
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_TOKEN_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwtSign({ id: user._id });
 
     res.cookie("token", token, cookieHelper);
 
@@ -53,9 +52,7 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_TOKEN_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwtSign({ id: user._id });
 
     res.cookie("token", token, cookieHelper);
 
@@ -71,10 +68,12 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  try{
+  try {
     res.clearCookie("token", cookieHelper);
     return res.json({ message: "Logout successful" });
-  }catch(err){
-    return res.status(500).json({ message: "Server error", error: err.message });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ message: "Server error", error: err.message });
   }
 };
