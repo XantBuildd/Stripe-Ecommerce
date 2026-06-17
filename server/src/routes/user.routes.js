@@ -5,7 +5,7 @@ import {
   updateProfile,
   changePassword,
   addToFavorites,
-  removeFromFavorites,
+  getFavorites,
 } from "../controllers/user.controllers.js";
 import { upload } from "../middlewares/multer.js";
 
@@ -34,8 +34,8 @@ router.put(
   changePassword,
 );
 
-router.post("/favorites/:productId", validateToken, addToFavorites);
+router.get("/favorites", validateToken, getFavorites);
 
-router.delete("/favorites/:productId", validateToken, removeFromFavorites);
+router.post("/favorites/:productId", validateToken, addToFavorites);
 
 export default router;
