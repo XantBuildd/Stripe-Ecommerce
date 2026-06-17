@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import productRoutes from "./routes/product.routes.js";
+import cartRoutes from "./routes/cart.routes.js";
 
 dotenv.config();
 const app = express();
@@ -26,5 +27,6 @@ app.use(
 app.use("/api", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api", productRoutes);
+app.use("/api", cartRoutes);
 
 export default app;
