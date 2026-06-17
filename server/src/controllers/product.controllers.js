@@ -4,13 +4,51 @@ import cloudinary from "../settings/cloudinary.js";
 import { generateUniqueSlug } from "../services/generateUniqueSlug.js";
 
 export const getProducts = async (req, res) => {
+  const { search, categories } = req.query;
+
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 12;
+  const minPrice = Number(req.query.minPrice) || 0;
+  const maxPrice = Number(req.query.maxPrice) || 99999999999;
+
   try {
-    const products = await Product.find({
+    const filter = {
       isActive: true,
+    };
+
+    if (search) {
+      filter.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
+        { categories: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    if (categories) {
+      filter.categories = { $in: categories.split(",") };
+    }
+
+    filter.price = { $gte: minPrice, $lte: maxPrice };
+
+    const skip = (page - 1) * limit;
+
+    const products = await Product.find({
+      filter,
+    })
+      .skip(skip)
+      .limit(limit);
+
+    const totalProducts = await Product.countDocuments({
+      filter,
     });
+
+    const totalPages = Math.ceil(totalProducts / limit);
 
     return res.status(200).json({
       products,
+      page,
+      limit,
+      totalPages,
     });
   } catch (err) {
     return res.status(500).json({
