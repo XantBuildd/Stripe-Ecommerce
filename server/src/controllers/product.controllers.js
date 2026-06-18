@@ -32,15 +32,9 @@ export const getProducts = async (req, res) => {
 
     const skip = (page - 1) * limit;
 
-    const products = await Product.find({
-      filter,
-    })
-      .skip(skip)
-      .limit(limit);
+    const products = await Product.find(filter).skip(skip).limit(limit);
 
-    const totalProducts = await Product.countDocuments({
-      filter,
-    });
+    const totalProducts = await Product.countDocuments(filter);
 
     const totalPages = Math.ceil(totalProducts / limit);
 
@@ -102,6 +96,7 @@ export const createProduct = async (req, res) => {
 
     return res.status(201).json({ product });
   } catch (err) {
+    console.error(err);
     return res.status(500).json({ message: "Server error" });
   }
 };

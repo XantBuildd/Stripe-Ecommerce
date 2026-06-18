@@ -1,5 +1,6 @@
+import "./config/env.js"
+
 import express from "express";
-import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
 import dbConnect from "./db.js";
@@ -9,10 +10,9 @@ import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
+import orderRoutes from "./routes/order.routes.js";
 
-dotenv.config();
 const app = express();
-
 dbConnect();
 
 app.use(cookieParser());
@@ -28,5 +28,6 @@ app.use("/api", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api", productRoutes);
 app.use("/api", cartRoutes);
+app.use("/api", orderRoutes);
 
 export default app;
