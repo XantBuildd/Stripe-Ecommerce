@@ -52,7 +52,10 @@ const Hero = () => {
                     </h2>
                     <p className="my-2 w-full">{slide.description}</p>
                   </main>
-                  <button className="bg-secundary mt-10 absolute bottom-15 cursor-pointer flex items-center gap-2 px-8 py-3 rounded-2xl text-black font-bold">
+                  <button
+                    className="bg-secundary z-10 overflow-hidden mt-10 absolute bottom-15 cursor-pointer flex items-center gap-2 px-8 py-3 rounded-2xl text-black font-bold
+                  before:absolute before:w-full before:z-[-1] before:h-full before:top-0 before:bottom-0 before:-left-full before:bg-black before:rounded-[5px] before:translate-x-0 before:transition-transform before:duration-600 before:ease-in-out hover:scale-[1.03] hover:text-white hover:transition-all hover:duration-100 ease-in-out hover:before:translate-x-full"
+                  >
                     <p>BUY NOW</p>
                     <FaArrowRight />
                   </button>

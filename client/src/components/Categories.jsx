@@ -7,9 +7,9 @@ const Categories = () => {
     <>
       <section className="ax-w-7xl mx-auto">
         <article className="w-full flex justify-between px-2 md:px-10">
-          <h2 className="text-xl font-bold">CATEGORIES</h2>
+          <h2 className="text-[18px] font-bold">CATEGORIES</h2>
           <div className="flex justify-center items-center font-semibold gap-2 cursor-pointer">
-            <Link className>View all</Link>
+            <Link>View all</Link>
             <FaArrowRight />
           </div>
         </article>
@@ -49,11 +49,11 @@ const Categories = () => {
                       before:duration-500
                       before:ease-in-out"
                   ></div>
-                  <div className="absolute bottom-6 left-2">
-                    <h4 className="text-primary font-bold text-[14px]">
+                  <div className="absolute bottom-6 left-2 md:bottom-10 md:left-6">
+                    <h4 className="text-primary font-bold text-[14px] md:text-xl">
                       {category.title}
                     </h4>
-                    <div className="flex justify-center items-center gap-2 cursor-pointer">
+                    <div className="flex items-center gap-2 cursor-pointer md:text-[16px]">
                       <Link className="text-primary text-[12px]">Explore</Link>
                       <FaArrowRight className="text-secundary" />
                     </div>
