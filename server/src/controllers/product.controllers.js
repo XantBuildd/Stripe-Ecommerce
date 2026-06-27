@@ -67,6 +67,23 @@ export const getProduct = async (req, res) => {
   }
 };
 
+export const getNewReleasesProducts = async (req, res) => {
+  try {
+    const productsNewRelease = await Product.find({ isActive: true })
+      .select("title price images slug")
+      .sort({ createdAt: -1 })
+      .limit(10);
+
+    if(productsNewRelease.length === 0){
+      return res.status(200).json({products: []})
+    }
+
+    return res.status(200).json(productsNewRelease);
+  } catch (err) {
+    return res.status(500).json({ message: "Server eror" });
+  }
+};
+
 export const createProduct = async (req, res) => {
   const { title, description, price, categories, stock } = req.body;
 
