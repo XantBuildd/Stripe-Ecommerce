@@ -1,0 +1,152 @@
+[
+  {
+    "title": "Minimalist Wooden Chair",
+    "slug": "minimalist-wooden-chair",
+    "description": "Modern wooden chair with a minimalist design, perfect for living rooms and offices.",
+    "images": [
+      {
+        "public_id": "chair-1",
+        "url": "https://res.cloudinary.com/dn57femqe/image/upload/v1782514351/chaqueta4_qgvwyg.webp"
+      }
+    ],
+    "price": 89.99,
+    "categories": ["Furniture", "Living Room"],
+    "stock": 15,
+    "isActive": true
+  },
+  {
+    "title": "Premium Leather Backpack",
+    "slug": "premium-leather-backpack",
+    "description": "Elegant leather backpack with multiple compartments for work and travel.",
+    "images": [
+      {
+        "public_id": "backpack-1",
+        "url": "https://res.cloudinary.com/dn57femqe/image/upload/v1782514350/chaqueta3_fzt1y5.jpg"
+      }
+    ],
+    "price": 129.99,
+    "categories": ["Accessories", "Bags"],
+    "stock": 20,
+    "isActive": true
+  },
+  {
+    "title": "Wireless Bluetooth Headphones",
+    "slug": "wireless-bluetooth-headphones",
+    "description": "High-quality wireless headphones with noise cancellation and long battery life.",
+    "images": [
+      {
+        "public_id": "headphones-1",
+        "url": "https://res.cloudinary.com/dn57femqe/image/upload/v1782514349/chaqueta2_x9kvj0.jpg"
+      }
+    ],
+    "price": 149.99,
+    "categories": ["Electronics", "Audio"],
+    "stock": 35,
+    "isActive": true
+  },
+  {
+    "title": "Smart Fitness Watch",
+    "slug": "smart-fitness-watch",
+    "description": "Track your workouts, heart rate, and daily activities with this smart fitness watch.",
+    "images": [
+      {
+        "public_id": "watch-1",
+        "url": "https://res.cloudinary.com/dn57femqe/image/upload/v1782514344/camiseta5-mujer_duqukz.jpg"
+      }
+    ],
+    "price": 199.99,
+    "categories": ["Electronics", "Wearables"],
+    "stock": 18,
+    "isActive": true
+  },
+  {
+    "title": "Organic Cotton Hoodie",
+    "slug": "organic-cotton-hoodie",
+    "description": "Comfortable hoodie made from premium organic cotton with a modern fit.",
+    "images": [
+      {
+        "public_id": "hoodie-1",
+        "url": "https://res.cloudinary.com/dn57femqe/image/upload/v1782514347/camiseta7-hombre_c1czxf.webp"
+      }
+    ],
+    "price": 59.99,
+    "categories": ["Clothing", "Men"],
+    "stock": 30,
+    "isActive": true
+  },
+  {
+    "title": "Ceramic Coffee Mug Set",
+    "slug": "ceramic-coffee-mug-set",
+    "description": "Set of four handcrafted ceramic mugs, perfect for coffee and tea lovers.",
+    "images": [
+      {
+        "public_id": "mug-1",
+        "url": "dummy-image.jpg"
+      }
+    ],
+    "price": 34.99,
+    "categories": ["Kitchen", "Home"],
+    "stock": 25,
+    "isActive": true
+  },
+  {
+    "title": "Portable Bluetooth Speaker",
+    "slug": "portable-bluetooth-speaker",
+    "description": "Compact speaker with powerful sound and waterproof design.",
+    "images": [
+      {
+        "public_id": "speaker-1",
+        "url": "https://res.cloudinary.com/dn57femqe/image/upload/v1782514339/camiseta4-mujer_szycxe.webp"
+      }
+    ],
+    "price": 79.99,
+    "categories": ["Electronics", "Audio"],
+    "stock": 22,
+    "isActive": true
+  },
+  {
+    "title": "Running Sneakers Pro",
+    "slug": "running-sneakers-pro",
+    "description": "Lightweight running shoes designed for comfort and maximum performance.",
+    "images": [
+      {
+        "public_id": "sneakers-1",
+        "url": "https://res.cloudinary.com/dn57femqe/image/upload/v1782514338/camiseta3-hombre_smi835.webp"
+      }
+    ],
+    "price": 109.99,
+    "categories": ["Footwear", "Sports"],
+    "stock": 40,
+    "isActive": true
+  },
+  {
+    "title": "Modern Desk Lamp",
+    "slug": "modern-desk-lamp",
+    "description": "LED desk lamp with adjustable brightness and sleek contemporary design.",
+    "images": [
+      {
+        "public_id": "lamp-1",
+        "url": "https://res.cloudinary.com/dn57femqe/image/upload/v1782514329/bolso2_oeftr2.jpg"
+      }
+    ],
+    "price": 49.99,
+    "categories": ["Home", "Lighting"],
+    "stock": 12,
+    "isActive": true
+  },
+  {
+    "title": "Stainless Steel Water Bottle",
+    "slug": "stainless-steel-water-bottle",
+    "description": "Double-wall insulated bottle that keeps drinks cold or hot for hours.",
+    "images": [
+      {
+        "public_id": "bottle-1",
+        "url": "https://res.cloudinary.com/dn57femqe/image/upload/v1782514329/camiseta1_e2fnjs.webp"
+      }
+    ],
+    "price": 24.99,
+    "categories": ["Accessories", "Outdoor"],
+    "stock": 50,
+    "isActive": true
+  }
+]
