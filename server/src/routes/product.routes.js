@@ -6,6 +6,7 @@ import {
   getProduct,
   getProducts,
   updateProduct,
+  getNewReleasesProducts,
 } from "../controllers/product.controllers.js";
 import { upload } from "../middlewares/multer.js";
 import { validateSchema } from "../middlewares/validateSchema.js";
@@ -19,8 +20,10 @@ import { isAdmin } from "../middlewares/isAdmin.js";
 const router = Router();
 
 router.get("/products", getProducts);
+router.get("/products/new-releases", getNewReleasesProducts);
 
 router.get("/products/:slug", getProduct);
+
 
 router.post(
   "/products",
