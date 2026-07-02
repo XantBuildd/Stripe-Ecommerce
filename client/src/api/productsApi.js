@@ -5,6 +5,11 @@ export const getProducts = async () => {
   return response.data;
 };
 
+export const getProductsFiltered = async (filter) => {
+  const response = await api.get(`/products?${filter}`);
+  return response.data;
+};
+
 export const getProduct = async (id) => {
   const response = await api.get(`/products/${id}`);
   return response.data;

@@ -20,6 +20,7 @@ import { isAdmin } from "../middlewares/isAdmin.js";
 const router = Router();
 
 router.get("/products", getProducts);
+
 router.get("/products/new-releases", getNewReleasesProducts);
 
 router.get("/products/:slug", getProduct);
