@@ -1,13 +1,19 @@
 import { FiHeart } from "react-icons/fi";
 import { FaArrowRight } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
-const NewProduct = ({ image, title, price }) => {
+const NewProduct = ({ image, title, price, slug }) => {
+  const navigate = useNavigate();
+  const handdleNavigation = () => {
+    navigate(`/product/${slug}`);
+  };
   return (
     <>
       <div
         className=" h-full
         flex
         flex-col overflow-hidden bg-[#ececec] transition-all duration-300 ease-in rounded-xl relative shadow-[0_8px_30px_rgba(0,0,0,0.2)] cursor-pointer group hover:scale-[1.03]"
+        onClick={() => handdleNavigation()}
       >
         <div className="overflow-hidden">
           <img

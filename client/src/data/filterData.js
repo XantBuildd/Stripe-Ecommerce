@@ -1,7 +1,7 @@
 const filterData = [
   {
     title: "Category",
-    options: ["All", "T-Shirts", "Hoodies", "Jackets", "Pants", "Accessories"],
+    options: ["T-Shirts", "Hoodies", "Jackets", "Pants", "Accessories"],
   },
   {
     title: "Price",

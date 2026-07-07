@@ -126,6 +126,7 @@ const NewReleases = () => {
                     image={product.images[0]?.url}
                     title={product.title}
                     price={product.price}
+                    slug
                   />
                 </SwiperSlide>
               );

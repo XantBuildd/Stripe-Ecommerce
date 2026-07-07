@@ -14,7 +14,13 @@ const Shop = () => {
 
   const [products, setproducts] = useState([]);
   const [openFilter, setOpenFilter] = useState(false);
+  const [page, setPage] = useState(1);
   const [openCategory, setOpenCategory] = useState(null);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    totalPages: 1,
+    totalProducts: 0,
+  });
   const [filters, setFilters] = useState({
     categories: [],
     minPrice: 0,
@@ -47,6 +53,9 @@ const Shop = () => {
       params.append("sortBy", filters.sortBy);
     }
 
+    params.append("page", page);
+    params.append("limit", 12);
+
     return params.toString();
   };
 
@@ -57,6 +66,13 @@ const Shop = () => {
       const data = await getProductsFiltered(query);
 
       setproducts(data.products);
+      setPagination({
+        page: data.page,
+        totalPages: data.totalPages,
+        totalProducts: data.totalProducts,
+      });
+      console.log(query);
+      console.log(data);
     } catch (err) {
       console.error(err);
     }
@@ -100,6 +116,30 @@ const Shop = () => {
         }
       }
     }
+
+    if (!checked) {
+      if (category === "Category") {
+        setFilters((prev) => ({
+          ...prev,
+          categories: prev.categories.filter((item) => item !== data),
+        }));
+      }
+
+      if (category === "Price") {
+        setFilters((prev) => ({
+          ...prev,
+          minPrice: 0,
+          maxPrice: 99999,
+        }));
+      }
+
+      if (category === "Sort By") {
+        setFilters((prev) => ({
+          ...prev,
+          sortBy: "",
+        }));
+      }
+    }
   };
 
   useEffect(() => {
@@ -107,7 +147,7 @@ const Shop = () => {
       await parseQueryParams();
     };
     fetchProducts();
-  }, [category]);
+  }, [category, page]);
 
   return (
     <>
@@ -140,128 +180,184 @@ const Shop = () => {
             </div>
           </div>
         </article>
-        <article className="w-full h-full">
-          <div className="w-full max-h-20 px-3 py-8 flex items-center justify-between">
+        <article className="w-full">
+          <div className="md:hidden px-4 py-4">
             <button
-              onClick={() => setOpenFilter(!openFilter)}
-              className="px-5 py-2 bg-[#e4dede7c] rounded-xl cursor-pointer md:hidden flex items-center justify-center gap-2 font-semibold"
+              onClick={() => setOpenFilter((prev) => !prev)}
+              className="flex items-center gap-2 px-5 py-2 rounded-xl cursor-pointer bg-neutral-100 font-semibold"
             >
               <IoFilterOutline />
-              Filter
+              Filters
             </button>
           </div>
-          <div
-            className={`w-full flex flex-col md:flex-row gap-6 p-4 ${openFilter ? "flex" : "hidden"}`}
-          >
-            <aside className="w-full md:w-72 bg-white rounded-2xl border border-gray-200 h-fit p-5">
-              <div className="flex items-center justify-between border-b pb-4">
-                <h2 className="text-xl font-bold">Filters</h2>
-                <button className="text-sm text-gray-500 hover:text-black transition">
-                  Clear
-                </button>
-              </div>
 
-              <ul className="mt-5 space-y-5">
-                {filterData.map((data) => (
-                  <li
-                    key={data.title}
-                    className="border-b border-gray-100 pb-5"
-                  >
-                    <div
-                      className="flex justify-between items-center cursor-pointer"
-                      onClick={() =>
-                        setOpenCategory(
-                          data.title === openCategory ? null : data.title,
-                        )
-                      }
+          <div className="flex items-start gap-6 px-4 py-6">
+            <aside
+              className={`
+        ${openFilter ? "block" : "hidden"}
+        md:block
+        w-full
+        md:w-72
+        lg:w-80
+        shrink-0
+      `}
+            >
+              <div className="bg-white border rounded-2xl p-5 md:sticky md:top-5">
+                <div className="flex justify-between items-center border-b pb-4">
+                  <h2 className="text-xl font-bold">Filters</h2>
+
+                  <button className="text-sm text-gray-500 hover:text-black">
+                    Clear
+                  </button>
+                </div>
+
+                <ul className="mt-6 space-y-6">
+                  {filterData.map((section) => (
+                    <li
+                      key={section.title}
+                      className="border-b border-gray-100 pb-5"
                     >
-                      <h3 className="font-semibold text-gray-900 transition-all duration-200 hover:text-black hover:font-bold">
-                        {data.title}
-                      </h3>
+                      <div
+                        className="flex justify-between items-center md:cursor-default cursor-pointer"
+                        onClick={() => {
+                          if (window.innerWidth < 768) {
+                            setOpenCategory(
+                              openCategory === section.title
+                                ? null
+                                : section.title,
+                            );
+                          }
+                        }}
+                      >
+                        <h3 className="font-semibold text-gray-900">
+                          {section.title}
+                        </h3>
 
-                      <FaPlus
-                        className={`text-gray-500 transition-all duration-300 ${
-                          openCategory === data.title ? "rotate-45" : "rotate-0"
-                        }`}
-                      />
-                    </div>
+                        <FaPlus
+                          className={`
+                    md:hidden
+                    transition-transform duration-300
+                    ${openCategory === section.title ? "rotate-45" : ""}
+                  `}
+                        />
+                      </div>
 
-                    <ul
-                      className={`
-                        overflow-hidden
-                        transition-all
-                        duration-300
-                        ${
-                          openCategory === data.title
-                            ? "max-h-60 opacity-100 mt-4"
-                            : "max-h-0 opacity-0"
-                        }
-                      `}
-                    >
-                      {data.options.map((option) => (
-                        <li
-                          key={option}
-                          className="flex justify-between items-center rounded-lg px-2 py-2 cursor-pointer hover:bg-gray-100 transition-all duration-200"
-                        >
-                          <div className="flex items-center gap-3">
+                      <ul
+                        className={`
+                  overflow-hidden
+                  transition-all
+                  duration-300
+                  md:max-h-[500px]
+                  md:opacity-100
+                  md:mt-4
+                  ${
+                    openCategory === section.title
+                      ? "max-h-60 opacity-100 mt-4"
+                      : "max-h-0 opacity-0"
+                  }
+                `}
+                      >
+                        {section.options.map((option) => (
+                          <li
+                            key={option}
+                            className="flex items-center gap-3 py-2"
+                          >
                             <input
                               type="checkbox"
                               value={option}
-                              className="w-4 h-4 accent-black cursor-pointer"
+                              className="w-4 h-4 accent-black"
                               onChange={(e) =>
                                 handleFilter(
-                                  data.title,
+                                  section.title,
                                   e.target.value,
                                   e.target.checked,
                                 )
                               }
                             />
 
-                            <label className="text-sm text-gray-700 group-hover:text-black transition">
+                            <label className="text-sm text-gray-700">
                               {option}
                             </label>
-                          </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                </ul>
 
-                          <span className="text-xs text-gray-400"></span>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
-              </ul>
-              <button
-                onClick={parseQueryParams}
-                className="
-                  w-full
-                  mt-6
-                  py-3
-                  rounded-xl
-                  bg-black
-                  text-white
-                  font-semibold
-                  transition-all
-                  duration-300
-                  hover:bg-neutral-800
-                  active:scale-95
-                  "
-              >
-                Apply Filters
-              </button>
+                <button
+                  onClick={parseQueryParams}
+                  className="
+            w-full
+            mt-6
+            py-3
+            rounded-xl
+            bg-black
+            text-white
+            font-semibold
+            hover:bg-neutral-800
+            transition-all
+          "
+                >
+                  Apply Filters
+                </button>
+              </div>
             </aside>
+
+            <section className="flex-1 min-w-0">
+              <div
+                className="
+          grid
+          grid-cols-2
+          md:grid-cols-3
+          lg:grid-cols-3
+          xl:grid-cols-4
+          2xl:grid-cols-5
+          gap-4
+          lg:gap-6
+        "
+              >
+                {products.map((product) => (
+                  <NewProduct
+                    key={product.slug}
+                    image={product.images[0]?.url}
+                    title={product.title}
+                    price={product.price}
+                    slug={product.slug}
+                  />
+                ))}
+              </div>
+            </section>
           </div>
-          <section className="flex-1">
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-              {products.map((product) => (
-                <NewProduct
-                  key={product.slug}
-                  image={product.images[0]?.url}
-                  title={product.title}
-                  price={product.price}
-                />
-              ))}
-            </div>
-          </section>
         </article>
+        <div className="flex justify-center items-center gap-3 mb-6">
+          {Array.from({ length: pagination.totalPages }, (_, index) => {
+            const pageNumber = index + 1;
+
+            return (
+              <button
+                key={pageNumber}
+                onClick={() => setPage(pageNumber)}
+                className={`
+          w-10
+          h-10
+          rounded-full
+          font-semibold
+          transition-all
+          duration-200
+          cursor-pointer
+          ${
+            page === pageNumber
+              ? "bg-black text-white"
+              : "bg-white border hover:bg-gray-100"
+          }
+        `}
+              >
+                {pageNumber}
+              </button>
+            );
+          })}
+        </div>
       </section>
     </>
   );

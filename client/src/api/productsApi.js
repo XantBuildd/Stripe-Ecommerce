@@ -10,8 +10,8 @@ export const getProductsFiltered = async (filter) => {
   return response.data;
 };
 
-export const getProduct = async (id) => {
-  const response = await api.get(`/products/${id}`);
+export const getProduct = async (slug) => {
+  const response = await api.get(`/products/${slug}`);
   return response.data;
 };
 
