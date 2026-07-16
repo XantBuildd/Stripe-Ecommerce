@@ -4,6 +4,8 @@ import { getProduct } from "../api/productsApi";
 import { useEffect, useRef, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { Navigation } from "swiper/modules";
+import { createItemCart } from "../api/cartApi";
+import { useNavigate } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -15,6 +17,8 @@ const Product = () => {
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -37,10 +41,27 @@ const Product = () => {
     );
   }
 
+  const handleBuy = async () => {
+    try {
+      const item = {
+        productId: product._id,
+        quantity: 1,
+      };
+
+      const response = await createItemCart(item);
+
+      console.log(response);
+    } catch (err) {
+      if (err.response?.status === 401) {
+        navigate("/login");
+      }
+    }
+  };
+
   return (
     <section className="py-8 md:py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-start md:w-[90%]">
+        <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-16 items-start md:w-[90%]">
           <article className="relative min-w-0 overflow-hidden max-h-200">
             <Swiper
               modules={[Navigation]}
@@ -164,6 +185,7 @@ const Product = () => {
               </div>
             </div>
             <button
+              onClick={handleBuy}
               className="
                 w-full
                 md:w-80
@@ -178,7 +200,7 @@ const Product = () => {
                 cursor-pointer
               "
             >
-              Buy Now
+              Add to Cart
             </button>
           </article>
         </div>

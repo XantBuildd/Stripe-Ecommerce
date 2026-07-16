@@ -9,7 +9,7 @@ const Categories = () => {
         <article className="w-full flex justify-between px-2 md:px-10">
           <h2 className="text-[18px] font-bold">CATEGORIES</h2>
           <div className="flex justify-center items-center font-semibold gap-2 cursor-pointer">
-            <Link>View all</Link>
+            <Link to={"/shop"}>View all</Link>
             <FaArrowRight />
           </div>
         </article>
@@ -54,7 +54,12 @@ const Categories = () => {
                       {category.title}
                     </h4>
                     <div className="flex items-center gap-2 cursor-pointer md:text-[16px]">
-                      <Link className="text-primary text-[12px]">Explore</Link>
+                      <Link
+                        className="text-primary text-[12px]"
+                        to={category.path}
+                      >
+                        Explore
+                      </Link>
                       <FaArrowRight className="text-secundary" />
                     </div>
                   </div>

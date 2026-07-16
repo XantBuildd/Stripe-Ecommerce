@@ -1,4 +1,4 @@
-import { FiHeart } from "react-icons/fi";
+// import { FiHeart } from "react-icons/fi";
 import { FaArrowRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
@@ -39,7 +39,7 @@ const NewProduct = ({ image, title, price, slug }) => {
           <h4 className="text-[10px] py-1 px-2 bg-secundary rounded-xl md:text-sm">
             NEW
           </h4>
-          <FiHeart className="cursor-pointer md:text-xl" />
+          {/* <FiHeart className="cursor-pointer md:text-xl" /> */}
         </div>
         <div className="p-3 flex flex-col flex-1 text-sm text-wrap px-2 py-2">
           <h2

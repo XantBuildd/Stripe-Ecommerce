@@ -36,7 +36,9 @@ const NewReleases = () => {
           <h2 className="text-[18px] font-bold">NEW RELEASES</h2>
 
           <div className="flex items-center gap-5">
-            <Link className="font-semibold">View all</Link>
+            <Link to={"/shop"} className="font-semibold">
+              View all
+            </Link>
           </div>
         </article>
         <article className="relative md:px-8">
@@ -126,7 +128,7 @@ const NewReleases = () => {
                     image={product.images[0]?.url}
                     title={product.title}
                     price={product.price}
-                    slug
+                    slug={product.slug}
                   />
                 </SwiperSlide>
               );

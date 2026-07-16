@@ -5,7 +5,7 @@ import {
   FiShoppingCart,
   FiUser,
   FiMenu,
-  FiHeart,
+  // FiHeart,
   FiBriefcase,
   FiShoppingBag,
   FiHome,
@@ -14,15 +14,31 @@ import {
 } from "react-icons/fi";
 import LogoWhite from "../assets/stripe-logo-white.png";
 import { TfiClose } from "react-icons/tfi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaXTwitter } from "react-icons/fa6";
+import navItems from "../data/navItemsData";
+import { useAuth } from "../context/useAuth.js";
+import { getCart } from "../api/cartApi";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
+  const [cart, setCart] = useState([]);
 
   const changeMenu = () => {
     setMenu(!menu);
   };
+
+  const { isAuthenticated, user } = useAuth();
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      const response = await getCart();
+      setCart(response.cart.items);
+    };
+    fetchCart();
+  }, []);
+
+  const quantity = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <div className="w-full h-18 flex justify-center md:bg-black md:text-primary">
@@ -49,11 +65,14 @@ const Navbar = () => {
         />
 
         <ul className="hidden md:flex md:justify-center md:items-center md:w-full md:h-full md:gap-3 lg:gap-8 md:text-xl">
-          {["Home", "Shop", "Men", "Women", "accessories"].map((item) => {
+          {navItems.map((item) => {
             return (
-              <li key={item} className="">
-                <Link className="relative z-10 w-full block overflow-hidden rounded-md text-white md:p-2 md:before:w-full md:before:h-full md:before:bg-secundary md:before:absolute md:before:top-0 md:before:left-0 md:before:-z-10 md:before:-translate-x-full md:hover:before:translate-x-0 md:before:transition-transform md:before:duration-500 md:before:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] md:hover:text-black md:transition-all md:duration-500">
-                  {item}
+              <li key={item.label}>
+                <Link
+                  to={item.path}
+                  className="relative z-10 w-full block overflow-hidden rounded-md text-white md:p-2 md:before:w-full md:before:h-full md:before:bg-secundary md:before:absolute md:before:top-0 md:before:left-0 md:before:-z-10 md:before:-translate-x-full md:hover:before:translate-x-0 md:before:transition-transform md:before:duration-500 md:before:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] md:hover:text-black md:transition-all md:duration-500"
+                >
+                  {item.label}
                 </Link>
               </li>
             );
@@ -120,16 +139,27 @@ const Navbar = () => {
           </div>
         </div>
 
-        <ul className="flex flex-1 justify-end gap-2 text-xl md:flex md:gap-3 lg:gap-5">
+        <ul className="flex items-center flex-1 justify-end gap-2 text-xl md:flex md:gap-3 lg:gap-5">
           <div className="relative cursor-pointer transition-transform duration-200 active:scale-95">
-            <FiShoppingCart />
-            <p className="absolute -top-1.5 -right-2 min-w-4 h-4 px-1 flex items-center justify-center rounded-full bg-secundary text-xs">
-              0
-            </p>
+            <Link to="/cart" className="flex items-center">
+              <FiShoppingCart />
+              <p className="absolute -top-1.5 -right-2 min-w-4 h-4 px-1 flex items-center justify-center rounded-full bg-secundary text-xs">
+                {quantity}
+              </p>
+            </Link>
           </div>
-          <FiUser className="cursor-pointer transition-transform duration-200 active:scale-95" />
+          <Link to="/profile" className="flex items-center">
+            {!isAuthenticated ? (
+              <FiUser className="cursor-pointer transition-transform duration-200 active:scale-95" />
+            ) : (
+              <img
+                src={user.avatar.url}
+                alt={user.username}
+                className="max-w-8 max-h-8 ml-2 rounded-full bg-black cursor-pointer transition-transform duration-200 active:scale-95 md:bg-transparent "
+              />
+            )}
+          </Link>
           <FiSearch className="hidden md:flex cursor-pointer transition-transform duration-200 active:scale-95" />
-          <FiHeart className="hidden cursor-pointer" />
         </ul>
       </nav>
     </div>
