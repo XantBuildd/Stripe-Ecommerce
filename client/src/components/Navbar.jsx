@@ -102,27 +102,27 @@ const Navbar = () => {
             </div>
 
             <ul className="flex flex-col w-full h-auto relative top-10 gap-5 mx-2 text-xl">
-              {["Home", "Shop", "Men", "Women", "accessories"].map(
-                (item, index) => {
-                  const Icons = [
-                    FiHome,
-                    FiShoppingBag,
-                    FiUser,
-                    FiUser,
-                    FiBriefcase,
-                  ];
-                  const Icon = Icons[index];
-                  return (
-                    <li
-                      key={item}
-                      className="flex items-center w-full gap-2 relative after:bg-primary after:w-[80%] after:h-px after:absolute after:-bottom-3 before:bg-primary before:w-[80%] before:absolute before:left-0 before:-top-2 before:-bottom-3 before:scale-x-0 before:origin-left before:transition-transform before:duration-300 before:[transition-timing-function:cubic-bezier(0.25,1,0.5,1)] before:-z-10 hover:before:scale-x-100 transition-colors duration-200 hover:text-black group"
-                    >
-                      <Icon className="relative z-10 transition-transform duration-300 group-hover:scale-110" />
-                      <Link className="relative z-10 w-full">{item}</Link>
-                    </li>
-                  );
-                },
-              )}
+              {navItems.map((item, index) => {
+                const Icons = [
+                  FiHome,
+                  FiShoppingBag,
+                  FiUser,
+                  FiUser,
+                  FiBriefcase,
+                ];
+                const Icon = Icons[index];
+                return (
+                  <li
+                    key={item.label}
+                    className="flex items-center w-full gap-2 relative after:bg-primary after:w-[80%] after:h-px after:absolute after:-bottom-3 before:bg-primary before:w-[80%] before:absolute before:left-0 before:-top-2 before:-bottom-3 before:scale-x-0 before:origin-left before:transition-transform before:duration-300 before:[transition-timing-function:cubic-bezier(0.25,1,0.5,1)] before:-z-10 hover:before:scale-x-100 transition-colors duration-200 hover:text-black group"
+                  >
+                    <Icon className="relative z-10 transition-transform duration-300 group-hover:scale-110" />
+                    <Link className="relative z-10 w-full" to={item.path}>
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
