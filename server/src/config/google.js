@@ -9,7 +9,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
       callbackURL:
-        "https://stripe-ecommerce-five.vercel.app/api/auth/google/callback",
+        "stripe-ecommerce-production.up.railway.app/api/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       let user = await User.findOne({
