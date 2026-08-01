@@ -81,7 +81,7 @@ const Login = () => {
         </div>
 
         <a
-          href="http://localhost:3000/api/auth/google"
+          href="https://stripe-ecommerce-five.vercel.app/api/auth/google"
           className="w-full flex justify-center items-center gap-3 border rounded-xl py-3 hover:bg-gray-50 transition"
         >
           Continue with Google
