@@ -12,7 +12,7 @@ import productRoutes from "./routes/product.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import passport from "passport";
-import "./config/passport.js";
+import "./config/google.js";
 
 const app = express();
 dbConnect();
