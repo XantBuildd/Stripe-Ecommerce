@@ -77,3 +77,13 @@ export const logout = (req, res) => {
       .json({ message: "Server error", error: err.message });
   }
 };
+
+export const googleCallback = (req, res) => {
+  const token = jwtSign({
+    id: req.user._id,
+  });
+
+  res.cookie("token", token, cookieHelper);
+
+  res.redirect(process.env.CLIENT_URL);
+};
