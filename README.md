@@ -20,7 +20,7 @@ A complete walkthrough of the application, from browsing products to authenticat
 
 <!-- Replace this with your GitHub video asset after uploading it -->
 
-https://github.com/user-attachments/assets/YOUR-VIDEO-ID
+[https://github.com/user-attachments/assets/YOUR-VIDEO-ID](https://github.com/user-attachments/assets/77819619-dc99-45d0-87e3-fca2461b0264)
 
 ---
 
