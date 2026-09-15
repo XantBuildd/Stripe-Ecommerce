@@ -18,6 +18,8 @@
 
 A complete walkthrough of the application, from browsing products to authentication and checkout.
 
+* LINK: [Link in production](https://stripe-ecommerce-five.vercel.app/)
+
 <!-- Replace this with your GitHub video asset after uploading it -->
 
 [https://github.com/user-attachments/assets/YOUR-VIDEO-ID](https://github.com/user-attachments/assets/77819619-dc99-45d0-87e3-fca2461b0264)
@@ -49,14 +51,16 @@ The goal of the project was to understand how a complete e-commerce application 
 ## 🖥️ Preview
 
 <p align="center">
-  <img src="./screenshots/home.png" width="48%" />
-  <img src="./screenshots/products.png" width="48%" />
+  <img src="./screenshots/Home.png" width="48%" />
+  <img src="./screenshots/Products.png" width="48%" />
 </p>
 
 <p align="center">
-  <img src="./screenshots/product-details.png" width="48%" />
-  <img src="./screenshots/cart.png" width="48%" />
+  <img src="./screenshots/ProductDetails.png" width="48%" />
+  <img src="./screenshots/Cart.png" width="48%" />
 </p>
+
+<img src="./screenshots/Profile.png" />
 
 ---
 
