@@ -61,7 +61,7 @@ export const createCheckoutSession = async (req, res) => {
       checkoutUrl: session.url,
     });
   } catch (err) {
-    return res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: err.message });
   }
 };
 
